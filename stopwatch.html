@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    div {
+      position: relative;
+      top: 10px;
+      height: 10vh;
+      width: 100%;
+      font-size: 50px;
+      font-weight: bolder;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .btn {
+      height: 8vh;
+      width: 100%;
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+    }
+    .btn button {
+      padding: 8px 20px;
+      color: white;
+      background-color: blueviolet;
+      border: none;
+      border-radius: 25px;
+    }
+  </style>
+
+  <body>
+    <div>00:00:00</div>
+    <div class="btn">
+      <button onclick="start()">Start</button>
+      <button onclick="stop()">Stop</button>
+      <button onclick="reset()">Reset</button>
+    </div>
+
+    <script>
+      let m = 0,
+        s = 0,
+        h = 0,
+        iid = 0;
+      let dr = document.getElementsByTagName("div")[0];
+      let ct = () => {
+        s++;
+        if (s == 60) {
+          m++;
+          s = 0;
+        }
+        dr.innerHTML =
+        (h <= 9 ? "0" + h : h) +":" +(m <= 9 ? "0" + m : m) +":" +(s <= 9 ? "0" + s : s)
+        if (m == 60) {
+          h++;
+          m = 0;
+        }
+        dr.innerHTML =
+        (h <= 9 ? "0" + h : h) +":" +(m <= 9 ? "0" + m : m) +":" +(s <= 9 ? "0" + s : s)
+      };
+      let start = () => {
+        if (iid == 0) {
+          iid = setInterval(ct, 1000);
+        }
+      };
+      let stop = () => {
+        clearInterval(iid);
+        iid = 0;
+      };
+      let reset = () => {
+        clearInterval(iid);
+        m = s = h = 0;
+        iid = 0;
+        dr.innerHTML = "00:00:00";
+      };
+    </script>
+  </body>
+</html>
